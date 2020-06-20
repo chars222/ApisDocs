@@ -29,43 +29,38 @@
         "summary" : "searches inventory",
         "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
         "operationId" : "searchInventory",
+        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "agente",
           "in" : "query",
-          "description" : "pass an optional search string for looking up inventory",
+          "description" : "agente que invoca",
           "required" : false,
           "type" : "string"
         }, {
-          "name" : "skip",
-          "in" : "query",
-          "description" : "number of records to skip for pagination",
+          "in" : "body",
+          "name" : "inventoryItem",
+          "description" : "Inventory item to add",
           "required" : false,
-          "type" : "integer",
-          "minimum" : 0,
-          "format" : "int32"
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "maximum number of records to return",
-          "required" : false,
-          "type" : "integer",
-          "maximum" : 50,
-          "minimum" : 0,
-          "format" : "int32"
+          "schema" : {
+            "$ref" : "#/definitions/InventoryItem"
+          }
         } ],
         "responses" : {
           "200" : {
-            "description" : "search results matching criteria",
+            "description" : "successful operation",
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/InventoryItem"
+                "$ref" : "#/definitions/Manufacturer"
               }
             }
           },
           "400" : {
-            "description" : "bad input parameter"
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
           }
         }
       },
@@ -102,42 +97,34 @@
   "definitions" : {
     "InventoryItem" : {
       "type" : "object",
-      "required" : [ "id", "manufacturer", "name", "releaseDate" ],
+      "required" : [ "ciCliente", "descripcion", "monto" ],
       "properties" : {
-        "id" : {
+        "ciCliente" : {
           "type" : "string",
-          "format" : "uuid",
-          "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          "example" : "4846515"
         },
-        "name" : {
+        "monto" : {
+          "type" : "number",
+          "example" : 100.0
+        },
+        "descripcion" : {
           "type" : "string",
-          "example" : "Widget Adapter"
-        },
-        "releaseDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2016-08-29T09:12:33.001Z"
-        },
-        "manufacturer" : {
-          "$ref" : "#/definitions/Manufacturer"
+          "example" : "pago de reserva"
         }
       }
     },
     "Manufacturer" : {
-      "required" : [ "name" ],
       "properties" : {
-        "name" : {
-          "type" : "string",
-          "example" : "ACME Corporation"
+        "status" : {
+          "type" : "number",
+          "example" : 0.0
         },
-        "homePage" : {
+        "mensaje" : {
           "type" : "string",
-          "format" : "url",
-          "example" : "https://www.acme-corp.com"
+          "example" : "Recarga exitosa"
         },
-        "phone" : {
-          "type" : "string",
-          "example" : "408-867-5309"
+        "data" : {
+          "type" : "string"
         }
       }
     }
