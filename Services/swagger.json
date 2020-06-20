@@ -26,21 +26,21 @@
     "/apisioncash/recarga/guardian" : {
       "get" : {
         "tags" : [ "Recarga" ],
-        "summary" : "searches inventory",
-        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "summary" : "recarga",
+        "description" : "Servicio para recarga de puntos por guardian",
         "operationId" : "searchInventory",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "agente",
+          "name" : "parametros de headers",
           "in" : "query",
           "description" : "agente que invoca",
           "required" : false,
           "type" : "string"
         }, {
           "in" : "body",
-          "name" : "inventoryItem",
-          "description" : "Inventory item to add",
+          "name" : "parametros de Body",
+          "description" : "parametros",
           "required" : false,
           "schema" : {
             "$ref" : "#/definitions/InventoryItem"
