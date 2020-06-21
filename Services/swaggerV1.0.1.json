@@ -1,0 +1,132 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a simple API",
+    "version" : "1.0.1",
+    "title" : "Simple Inventory API",
+    "contact" : {
+      "email" : "you@your-company.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/carlosgutierrez/ApiTest/1.0.0",
+  "tags" : [ {
+    "name" : "Recarga",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/apisioncash/recarga/guardian" : {
+      "get" : {
+        "tags" : [ "Recarga" ],
+        "summary" : "recarga",
+        "description" : "Servicio para recarga de puntos por guardian",
+        "operationId" : "searchInventory",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "parametros de headers",
+          "in" : "query",
+          "description" : "agente que invoca",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "parametros de Body",
+          "description" : "parametros",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/InventoryItem"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Manufacturer"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "admins" ],
+        "summary" : "adds an inventory item",
+        "description" : "Adds an item to the system",
+        "operationId" : "addInventory",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "inventoryItem",
+          "description" : "Inventory item to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/InventoryItem"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "InventoryItem" : {
+      "type" : "object",
+      "required" : [ "ciCliente", "descripcion", "monto" ],
+      "properties" : {
+        "ciCliente" : {
+          "type" : "string",
+          "example" : "4846515"
+        },
+        "monto" : {
+          "type" : "number",
+          "example" : 100.0
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "pago de reserva"
+        }
+      }
+    },
+    "Manufacturer" : {
+      "properties" : {
+        "status" : {
+          "type" : "number",
+          "example" : 0.0
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "Recarga exitosa"
+        },
+        "data" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
