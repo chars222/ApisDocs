@@ -15,7 +15,7 @@
   "host" : "virtserver.swaggerhub.com",
   "basePath" : "/carlosgutierrez/ApiTest/1.0.0",
   "tags" : [ {
-    "name" : "Recarga",
+    "name" : "Recargas",
     "description" : "Secured Admin-only calls"
   }, {
     "name" : "developers",
