@@ -1,0 +1,23 @@
+{
+  "name": "apisdocs",
+  "version": "1.1.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chars222/ApisDocs.git"
+  },
+  "author": "Carlos Alfredo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chars222/ApisDocs/issues"
+  },
+  "homepage": "https://github.com/chars222/ApisDocs#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.4"
+  }
+}
